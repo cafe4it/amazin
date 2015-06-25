@@ -1,2 +1,2 @@
 // Write your package code here!
-amazon = Npm.require('amazon-product-api');
+AMAZON = Npm.require('amazon-product-api');

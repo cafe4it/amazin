@@ -16,7 +16,7 @@ Package.onUse(function (api) {
     api.versionsFrom('1.1.0.2');
     api.addFiles('apac.js','server');
 
-    if('undefined' === typeof amazon){
-        api.export('amazon');
+    if('undefined' === typeof AMAZON){
+        api.export('AMAZON');
     }
 });
