@@ -12,9 +12,9 @@ if(Meteor.isServer){
                         id : '.label.label-info.a2-node@text'
                     }])
                 })(function(err,obj){
-                    var items = {locale : locale},
-                        items = _.extend(items, {items : obj});
-                    done(err,items);
+                    var nodes = {locale : locale},
+                        nodes = _.extend(nodes, {items : obj.items});
+                    done(err,nodes);
                 });
             });
             return rs.result;

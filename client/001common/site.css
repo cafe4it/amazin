@@ -1,0 +1,13 @@
+ul.nodes_item li{
+    margin: 5px;
+    opacity: 0;
+}
+
+ul.nodes_item li i{
+    vertical-align: middle;
+}
+
+ul.nodes_item li a{
+    display: inline-block;
+    vertical-align: middle;
+}
