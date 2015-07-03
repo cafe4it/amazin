@@ -1,0 +1,20 @@
+{
+  "us" : {
+    "all" : {
+      "text" : "T",
+      "value" : "All"
+    },
+    "Apparel" : {
+      "text" : "",
+      "value" : "Apparel"
+    },
+    "Appliances" : {
+      "text" : "",
+      "value" : "Appliances"
+    },
+    "ArtsAndCrafts" : {
+      "text" : "",
+      "value" : "ArtsAndCrafts"
+    }
+  }
+}

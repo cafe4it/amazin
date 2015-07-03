@@ -11,9 +11,13 @@ meteorhacks:flow-components
 meteorhacks:fast-render
 accounts-base
 accounts-password
-twbs:bootstrap
 fortawesome:fontawesome
 tap:i18n
 cafe4it:apac
 meteorhacks:async
-alexsmr:apac
+materialize:materialize
+cafe4it:xray
+aldeed:collection2
+aldeed:simple-schema
+gildaspk:autoform-materialize
+aldeed:autoform
