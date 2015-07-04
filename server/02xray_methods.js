@@ -9,11 +9,16 @@ if(Meteor.isServer){
                 xr(url,{
                     items : xr('div.hn',[{
                         name : '.c_name@text',
+                        href : '.c_name@href',
                         id : '.label.label-info.a2-node@text'
                     }])
                 })(function(err,obj){
-                    var nodes = {locale : locale},
-                        nodes = _.extend(nodes, {items : obj.items});
+                    var nodes = {locale : locale,items : []};
+                    nodes.items = _.map(obj.items, function(i){
+                        var a = i.href,
+                            a = a.substring(a.indexOf(nodes.locale)+3,a.lastIndexOf('/'));
+                        return _.extend(i,{searchIndex : a});
+                    })
                     done(err,nodes);
                 });
             });

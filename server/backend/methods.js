@@ -11,6 +11,7 @@ if(Meteor.isServer){
                                 locale : nodes.locale,
                                 nodeId : i.id,
                                 icon : 'label',
+                                searchIndex : i.searchIndex,
                                 text1 : i.name,
                                 text2 : i.name
                             }

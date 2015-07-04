@@ -8,12 +8,12 @@ if(Meteor.isServer){
                 awsSecret: AmzConfig.Secret,
                 awsTag: AmzConfig.Tag
             });
-            /*opHelper = new apac.OperationHelper({
+            opHelper = new apac.OperationHelper({
                 awsId:     AmzConfig.Id,
                 awsSecret: AmzConfig.Secret,
                 assocId:   AmzConfig.Tag
                 // xml2jsOptions: an extra, optional, parameter for if you want to pass additional options for the xml2js module. (see https://github.com/Leonidas-from-XIV/node-xml2js#options)
-            });*/
+            });
         }
     })
 }

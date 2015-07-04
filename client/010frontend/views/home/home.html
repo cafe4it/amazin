@@ -31,7 +31,7 @@
             <ul class="nodes_item">
                 {{#each browseNodes 1}}
                     <li>
-                        <a class="deep-purple-text text-darken-4 tooltipped" href="nodes/{{_id}}" data-position="right"
+                        <a class="deep-purple-text text-darken-4 tooltipped" href="{{href}}" data-position="right"
                            data-delay="50" data-tooltip="{{text2}}">
                             <i class="fa fa-tags"></i> {{text2}}
                         </a>
@@ -43,7 +43,7 @@
             <ul class="nodes_item">
                 {{#each browseNodes 2}}
                     <li>
-                        <a class="deep-purple-text text-darken-4 tooltipped" href="nodes/{{_id}}" data-position="right"
+                        <a class="deep-purple-text text-darken-4 tooltipped" href="/{{locale}}/{{_id}}" data-position="right"
                            data-delay="50" data-tooltip="{{text2}}">
                             <i class="fa fa-tags"></i> {{text2}}
                         </a>
@@ -55,7 +55,7 @@
             <ul class="nodes_item">
                 {{#each browseNodes 3}}
                     <li>
-                        <a class="deep-purple-text text-darken-4 tooltipped" href="nodes/{{_id}}" data-position="right"
+                        <a class="deep-purple-text text-darken-4 tooltipped" href="/{{locale}}/{{_id}}" data-position="right"
                            data-delay="50" data-tooltip="{{text2}}">
                             <i class="fa fa-tags"></i> {{text2}}
                         </a>

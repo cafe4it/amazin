@@ -1,6 +1,6 @@
 Template.home.rendered = function(){
     $(document).ready(function(){
-        $('select').material_select();
+        Meteor.setTimeout(function(){$('select').material_select();},300);
     })
 }
 
@@ -20,6 +20,10 @@ Template.home.helpers({
             return nodes
         }else{
             var totalPages = Math.ceil(nodes.length / 13);
+            nodes = _.map(nodes,function(node){
+                var param = {id : node._id};
+                return _.extend(node, {href : FlowRouter.path('itemsByNode',param)});
+            })
             if(totalPages == 3){
                 return {
                     name : 'browseNodes_3',
@@ -39,7 +43,7 @@ Template.browseNodes_3.helpers({
 
 Template.browseNodes_3.rendered = function(){
     $(document).ready(function(){
-        Materialize.showStaggeredList('.nodes_item');
+        //Materialize.showStaggeredList('.nodes_item');
         $('.tooltipped').tooltip({delay: 50});
     })
 }
