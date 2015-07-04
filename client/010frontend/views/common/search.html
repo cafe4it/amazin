@@ -1,0 +1,37 @@
+<template name="search_widget">
+    {{#if Template.subscriptionsReady}}
+        <div class="row">
+            <div class="large-3 columns">
+                <select id="sltCategories">
+                    <option value="" selected>Tất cả danh mục</option>
+                    {{#each browseNodes}}
+                        <option value="{{nodeId}}">{{text2}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="large-3 columns">
+                <select id="sltStatus">
+                    <option value="" selected>Tình trạng sản phẩm</option>
+                    <option value="All">Tất cả</option>
+                    <option value="New">Mới</option>
+                    <option value="Used">Đã sử dụng</option>
+                    <option value="Refurbished">Tân trang lại</option>
+                    <option value="Collectible">Hàng sưu tầm</option>
+                </select>
+            </div>
+            <div class="large-3 columns">
+                <input placeholder="Từ giá 0.00$" id="txtMinPrice" type="number">
+            </div>
+            <div class="large-3 columns">
+                <input placeholder="Đến giá 0.00$" id="txtMaxPrice" type="number">
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <input class="" id="txtKeyword" type="text" placeholder="Search">
+            </div>
+        </div>
+    {{else}}
+        {{> data_loading}}
+    {{/if}}
+</template>

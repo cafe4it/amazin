@@ -1,62 +1,57 @@
 <template name="home">
-    <div class="container">
-        {{#if isReady 'front_browseNodes'}}
-            <div class="row">
-                <div class="input-field col s3">
-                    <select>
-                        <option value="" selected>Tất cả</option>
-                        {{#each browseNodes 1}}
-                            <option value="{{_id}}">{{text2}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                <div class="input-field col s9">
-                    <input id="icon_prefix" type="text" class="validate" placeholder="Search">
-                </div>
-            </div>
-            {{> Template.dynamic template=browseNodes.name data=browseNodes.data}}
-        {{else}}
-            <div class="row">
-                <div class="col s12">
-                    {{> data_loading}}
-                </div>
-            </div>
-        {{/if}}
-    </div>
+    {{> search_widget}}
+    {{#if isReady 'front_browseNodes'}}
+        {{> Template.dynamic template=browseNodes.name data=browseNodes.data}}
+    {{else}}
+        {{> data_loading}}
+    {{/if}}
 </template>
 
 <template name="browseNodes_3">
     <div class="row">
-        <div class="col s4">
-            <ul class="nodes_item">
+        <div class="large-4 columns">
+            <ul class="no-bullet">
                 {{#each browseNodes 1}}
                     <li>
-                        <a class="deep-purple-text text-darken-4 tooltipped" href="{{href}}" data-position="right"
-                           data-delay="50" data-tooltip="{{text2}}">
+                        <a href="{{href}}" data-tooltip aria-haspopup="true" class="has-tip" data-options="show_on:large" title="{{text2}}">
                             <i class="fa fa-tags"></i> {{text2}}
                         </a>
                     </li>
                 {{/each}}
             </ul>
         </div>
-        <div class="col s4">
-            <ul class="nodes_item">
+        <div class="large-4 columns">
+            <ul class="no-bullet">
                 {{#each browseNodes 2}}
                     <li>
-                        <a class="deep-purple-text text-darken-4 tooltipped" href="/{{locale}}/{{_id}}" data-position="right"
-                           data-delay="50" data-tooltip="{{text2}}">
+                        <a href="{{href}}" data-tooltip aria-haspopup="true" class="has-tip" data-options="show_on:large" title="{{text2}}">
                             <i class="fa fa-tags"></i> {{text2}}
                         </a>
                     </li>
                 {{/each}}
             </ul>
         </div>
-        <div class="col s4">
-            <ul class="nodes_item">
+        <div class="large-4 columns">
+            <ul class="no-bullet">
                 {{#each browseNodes 3}}
                     <li>
-                        <a class="deep-purple-text text-darken-4 tooltipped" href="/{{locale}}/{{_id}}" data-position="right"
-                           data-delay="50" data-tooltip="{{text2}}">
+                        <a href="{{href}}" data-tooltip aria-haspopup="true" class="has-tip" data-options="show_on:large" title="{{text2}}">
+                            <i class="fa fa-tags"></i> {{text2}}
+                        </a>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</template>
+
+<template name="browseNodes_list">
+    <div class="row">
+        <div class="large-12 columns">
+            <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-3 no-bullet">
+                {{#each browseNodes}}
+                    <li>
+                        <a href="{{href}}" data-tooltip aria-haspopup="true" class="has-tip" data-options="show_on:large" title="{{text2}}">
                             <i class="fa fa-tags"></i> {{text2}}
                         </a>
                     </li>

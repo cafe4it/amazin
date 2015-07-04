@@ -1,12 +1,3 @@
-ul.nodes_item li{
-    margin: 5px;
-}
-
-ul.nodes_item li i{
-    vertical-align: middle;
-}
-
-ul.nodes_item li a{
-    display: inline-block;
-    vertical-align: middle;
+nav.top-bar{
+    margin-bottom: 10px;
 }

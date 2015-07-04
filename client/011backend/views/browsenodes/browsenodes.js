@@ -7,7 +7,7 @@ Template.admin_browsenodes.events({
         e.preventDefault();
         Meteor.call('updateBrowseNodes',function(err,rs){
             if(err) console.log('Err : ', err);
-            Materialize.toast('Cập nhật thành công ' + rs + ' nodes',5000);
+            console.log('Cập nhật thành công ' + rs + ' nodes',5000);
         })
     }
 })

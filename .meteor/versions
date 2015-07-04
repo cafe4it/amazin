@@ -1,6 +1,6 @@
 accounts-base@1.2.0
 accounts-password@1.1.1
-aldeed:autoform@5.1.2
+aldeed:autoform@5.3.0
 aldeed:collection2@2.3.3
 aldeed:simple-schema@1.3.3
 alexsmr:apac@0.0.4
@@ -22,10 +22,10 @@ ddp@1.1.0
 deps@1.0.7
 ejson@1.0.6
 email@1.0.6
+ewall:foundation@5.5.2
 fastclick@1.0.3
 fortawesome:fontawesome@4.3.0
 geojson-utils@1.0.3
-gildaspk:autoform-materialize@0.0.20
 html-tools@1.0.4
 htmljs@1.0.4
 http@1.1.0
@@ -36,14 +36,13 @@ launch-screen@1.0.2
 livedata@1.0.13
 localstorage@1.0.3
 logging@1.0.7
-materialize:materialize@0.97.0
 meteor@1.1.6
 meteor-platform@1.2.2
 meteorhacks:async@1.0.0
 meteorhacks:fast-render@2.5.0
 meteorhacks:flow-components@0.0.41
-meteorhacks:flow-layout@1.4.0
-meteorhacks:flow-router@1.16.2
+meteorhacks:flow-layout@1.4.1
+meteorhacks:flow-router@1.17.2
 meteorhacks:inject-data@1.3.0
 meteorhacks:picker@1.0.2
 meteorspark:util@0.2.0

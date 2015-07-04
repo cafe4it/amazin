@@ -25,8 +25,8 @@ if (Meteor.isServer) {
         },
         amazon_BrowseNodeLookup: function (browseNodeId, ResponseGroup) {
             var ResponseGroup = ResponseGroup || 'BrowseNodeInfo';
-            check(browseNodeId, String);
-            var node = BrowseNodes.findOne({_id : browseNodeId});
+            check(browseNodeId, Number);
+            var node = BrowseNodes.findOne({nodeId : browseNodeId});
             if (opHelper && node) {
                 var rs = Async.runSync(function (done) {
                     opHelper.execute('BrowseNodeLookup',{
@@ -40,8 +40,8 @@ if (Meteor.isServer) {
             }
         },
         amazon_ItemSearchAndNodes : function(BrowseNodeId){
-            check(BrowseNodeId,String);
-            var node = BrowseNodes.findOne({_id : BrowseNodeId});
+            check(BrowseNodeId,Number);
+            var node = BrowseNodes.findOne({nodeId : BrowseNodeId});
             if(opHelper && node){
                 var rs = Async.runSync(function(done){
                     opHelper.execute('ItemSearch',{

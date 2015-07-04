@@ -15,11 +15,10 @@ fortawesome:fontawesome
 tap:i18n
 cafe4it:apac
 meteorhacks:async
-materialize:materialize
 cafe4it:xray
 aldeed:collection2
 aldeed:simple-schema
-gildaspk:autoform-materialize
 aldeed:autoform
 alexsmr:apac
 reactive-var
+ewall:foundation
