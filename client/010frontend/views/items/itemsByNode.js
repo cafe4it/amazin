@@ -1,26 +1,31 @@
 Template.itemsByNode.onCreated(function(){
-    SubBrowseNodes = new ReactiveVar();
-    ItemsAndNodes = new ReactiveVar();
-    Session.set('selectedCategory',FlowRouter.getParam('nodeId'));
+    var self = this;
+    self.SubBrowseNodes = new ReactiveVar();
+    self.Items = new ReactiveVar();
+    self.autorun(function(c){
+        var nodeId = FlowRouter.getParam('nodeId'),
+            searchIndex = FlowRouter.getParam('searchIndex');
+        Session.set('selectedCategory',nodeId);
+
+        if(nodeId){
+            nodeId = parseInt(nodeId);
+            Meteor.call('amazon_BrowseNodeLookup',searchIndex,nodeId,function(e,rs){
+                self.SubBrowseNodes.set(rs);
+            });
+            Meteor.call('amazon_ItemSearchAndNodes',nodeId,searchIndex,function(e,rs){
+                self.Items.set(rs);
+            });
+
+        }
+    })
 });
 
-Tracker.autorun(function(c){
-    var nodeId = FlowRouter.getParam('nodeId');
-    if(nodeId){
-        nodeId = parseInt(nodeId);
-        Meteor.call('amazon_BrowseNodeLookup',nodeId,function(e,rs){
-            SubBrowseNodes.set(rs);
-        })
-        Meteor.call('amazon_ItemSearchAndNodes',nodeId,function(e,rs){
-            ItemsAndNodes.set(rs);
-        })
-    }
-})
+
 Template.itemsByNode.helpers({
-    browseNodes : function(){
-        return SubBrowseNodes.get();
+    subBrowseNodes : function(){
+        return Template.instance().SubBrowseNodes.get();
     },
-    items : function(){
-        return ItemsAndNodes.get()
+    searchResult : function(){
+        return Template.instance().Items.get()
     }
 })

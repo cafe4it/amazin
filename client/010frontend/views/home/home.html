@@ -1,10 +1,5 @@
 <template name="home">
     {{> search_widget}}
-    {{#if isReady 'front_browseNodes'}}
-        {{> Template.dynamic template=browseNodes.name data=browseNodes.data}}
-    {{else}}
-        {{> data_loading}}
-    {{/if}}
 </template>
 
 <template name="browseNodes_3">

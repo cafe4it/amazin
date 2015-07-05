@@ -23,6 +23,26 @@ if(Meteor.isServer){
                 });
             });
             return rs.result;
+        },
+        'xRay_getAmazonCategories' : function(){
+            var url = 'http://www.amazon.com',
+                userAgent = 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:38.0) Gecko/20100101 Firefox/38.0';
+            var rs = Async.runSync(function(done){
+                var xr = Xray();
+                xr(url,{
+                    items : xr('select#searchDropdownBox option',[{
+                        text : '@text',
+                        value : '@value'
+                    }])
+                })(function(err,obj){
+                    if(err) console.log(err);
+                    var items = _.map(obj.items, function(i){
+                        return _.extend(i,{text : encodeURI(i.text)});
+                    })
+                    done(null,items)
+                })
+            })
+            return rs.result;
         }
     })
 }

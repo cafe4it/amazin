@@ -1,3 +1,11 @@
 nav.top-bar{
     margin-bottom: 10px;
 }
+
+ul#list_items li{
+    padding-bottom: 5px !important;
+}
+
+ul#list_items .panel{
+    margin-bottom: 5px !important;
+}

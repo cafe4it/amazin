@@ -24,6 +24,21 @@ if(Meteor.isServer){
                     console.log('Ex : ',ex);
                 }
             }
+        },
+        updateAmazonCategories : function(){
+            var categories = Meteor.call('xRay_getAmazonCategories');
+            var rs = 0;
+            _.each(categories,function(cat){
+                AmazonCategories.upsert({value : cat.value},{
+                    $set : {
+                        text : cat.text,
+                        vietnamese : cat.text,
+                        value : cat.value
+                    }
+                });
+                rs++;
+            });
+            return rs;
         }
     })
 }

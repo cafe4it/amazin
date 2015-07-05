@@ -1,10 +1,36 @@
 <template name="itemsByNode">
     <div class="container">
         {{> search_widget}}
+        {{#if searchResult.IsValid}}
         <div class="row">
-            <div class="col s12">
-
+            <div class="large-12 columns">
+                <p><strong>Sản phẩm bán chạy </strong>[{{searchResult.TotalResults}}]</p>
+                <ul class="small-block-grid-1 no-bullet" id="list_items">
+                    {{#each searchResult.Items}}
+                    <li>
+                        <div class="panel clearfix">
+                            <div class="left">
+                                <img src="{{Thumbnail}}" alt="{{Title}}" width="106px"/>
+                            </div>
+                            <div class="">{{shortTitle Title}}</div>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ul>
             </div>
         </div>
+        {{/if}}
+        {{#if subBrowseNodes.isValid}}
+        <div class="row">
+            <div class="large-12 columns">
+                <p><strong>Danh mục con</strong></p>
+                <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-3 no-bullet">
+                    {{#each subBrowseNodes.data}}
+                    <li><a href="/itemsByNode/{{searchIndex}}/{{BrowseNodeId}}"><i class="fa fa-bars"></i> {{Name}}</a></li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        {{/if}}
     </div>
 </template>

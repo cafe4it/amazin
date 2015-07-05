@@ -19,8 +19,11 @@ Template.home.helpers({
         }else{
             var totalPages = Math.ceil(nodes.length / 13);
             nodes = _.map(nodes, function (node) {
-                var param = {nodeId: node.nodeId, searchIndex: node.searchIndex};
-                return _.extend(node, {href: FlowRouter.path('itemsByNode', param)});
+                var param = {nodeId: node.nodeId, searchIndex: node.searchIndex},
+                    path = FlowRouter.path('itemsByNode', param);
+                if(node.searchIndex === 'Apparel') path = '#';
+                return _.extend(node, {href: path});
+
             })
             /*if (totalPages == 3) {
                 return {
