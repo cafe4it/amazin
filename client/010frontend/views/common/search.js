@@ -69,7 +69,7 @@ Template.search_widget.events({
         if(e.keyCode == 13){
            var keyword = $('#txtKeyword').val(),
                catId = $('#sltCategories').val();
-            if(keyword.length <= 3) return;
+            if(keyword.length <= 1) return;
             paramsSearch.set({
                 catId : catId,
                 keywords : keyword,

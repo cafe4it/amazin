@@ -69,15 +69,17 @@ if (Meteor.isServer) {
                 return rs.result;
             }
         },
-        scrapy_searchAmazon: function (catId, keywords) {
+        scrapy_searchAmazon: function (catId, keywords,page) {
             this.unblock();
             check(catId, String);
             check(keywords, String);
-            var templateUrl = _.template('http://www.amazon.com/s/ref=nb_sb_ss_ime_i_1_5?url=<%=category%>&field-keywords=<%=keywords%>');
+            check(page,Number);
+            var templateUrl = _.template('http://www.amazon.com/s/ref=ref=sr_pg_<%=page%>?url=<%=category%>&field-keywords=<%=keywords%>'),
+                page = page || 1;
             var cat = AmazonCategories.findOne({_id: catId});
             if (cat) {
                 var rs = Async.runSync(function (done) {
-                    var url = encodeURI(templateUrl({category: cat.value, keywords: keywords})),
+                    var url = encodeURI(templateUrl({category: cat.value, keywords: keywords, page: page})),
                         model = {
                             title: 'title',
                             resultCount: '#s-result-count',
@@ -101,12 +103,13 @@ if (Meteor.isServer) {
                                     get: 'src'
                                 },
                                 Price: {
-                                    selector: 'span.s-price',
+                                    selector: 'span.a-color-price.s-price',
                                     get: 'text'
                                 },
                                 Category: {
                                     selector: 'div.a-span5 a.a-size-small.a-link-normal.a-text-normal span.a-text-bold',
-                                    get: 'text'
+                                    get: 'text',
+                                    prefix : ''
                                 }
                             }
                         }
@@ -117,7 +120,8 @@ if (Meteor.isServer) {
                         } else {
                             var keys = ['asin', 'title', 'shortTitle', 'thumbnail', 'price', 'category'];
                             if (_.isArray(result.items.ASIN) && _.isArray(result.items.Title)) {
-                                var values = _.zip(result.items.ASIN, result.items.Title, result.items.ShortTitle, result.items.Thumbnail, result.items.Price, result.items.Category);
+                                var categories = (!_.isNull(result.items.Category)) ? result.items.Category : _.map(result.items.ASIN,function(a){return ''});
+                                var values = _.zip(result.items.ASIN, result.items.Title, result.items.ShortTitle, result.items.Thumbnail, result.items.Price, categories);
                                 var items = _.map(values, function (v) {
                                     return _.object(keys, v);
                                 });
