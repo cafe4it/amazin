@@ -91,9 +91,15 @@
 </template>
 
 <template name="pagination">
+    {{#if pages}}
     <div class="row">
-        <div class="medium-12">
-
+        <div class="medium-1 columns">
+            <select name="sltPages" id="sltPages">
+                {{#each pages}}
+                    <option value="{{value}}">{{text}}</option>
+                {{/each}}
+            </select>
         </div>
     </div>
+    {{/if}}
 </template>

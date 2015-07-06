@@ -73,12 +73,16 @@ if (Meteor.isServer) {
             this.unblock();
             check(catId, String);
             check(keywords, String);
-            check(page,Number);
+
             var templateUrl = _.template('http://www.amazon.com/s/ref=ref=sr_pg_<%=page%>?url=<%=category%>&field-keywords=<%=keywords%>'),
                 page = page || 1;
             var cat = AmazonCategories.findOne({_id: catId});
             if (cat) {
                 var rs = Async.runSync(function (done) {
+                    if(cat.value === 'search-alias=local-services'){
+                        done(null,{resultCount : 'NOTFOUND',totalPages : -1})
+                        return;
+                    }
                     var url = encodeURI(templateUrl({category: cat.value, keywords: keywords, page: page})),
                         model = {
                             title: 'title',

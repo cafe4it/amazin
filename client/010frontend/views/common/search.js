@@ -82,6 +82,7 @@ Template.search_widget.events({
 
 function callSearch(){
     var params = paramsSearch.get();
+    $('#hasPagination').html('');
     if(params){
         searchResult.set({
             isSearching : true
@@ -91,8 +92,13 @@ function callSearch(){
             searchResult.set({
                 isFound : (rs.resultCount !== 'NOTFOUND'),
                 data : rs
-            })
-        })
+            });
+            if(rs.totalPages > 0){
+                $('#hasPagination').html('');
+                Blaze.renderWithData(Template.pagination,{totalPages : rs.totalPages},$('#hasPagination')[0]);
+            }
+        });
+
     }
 }
 
@@ -112,7 +118,34 @@ Template.pagination.helpers({
     pages : function(){
         var data = Template.instance().data;
         if(data.totalPages && data.totalPages > 0){
-            
+            var p = [];
+            for(var i = 1; i<=data.totalPages;i++){
+                p.push({
+                    text : i,
+                    value : i
+                });
+            }
+            return p;
         }
     }
-})
+});
+
+Template.pagination.events({
+    'change #sltPages' : function(e,t){
+        e.preventDefault();
+        var params = paramsSearch.get(),
+            page = $('#sltPages').val();
+        if(page !== params.page){
+            paramsSearch.set(_.extend(params,{page : page}));
+            callSearch();
+        }
+    }
+});
+
+Template.pagination.rendered = function(){
+    $(document).ready(function(){
+        Meteor.setTimeout(function(){
+            $('#sltPages').val(paramsSearch.get().page);
+        },1000)
+    })
+}
