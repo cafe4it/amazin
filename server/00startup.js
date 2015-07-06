@@ -15,5 +15,8 @@ if(Meteor.isServer){
                 // xml2jsOptions: an extra, optional, parameter for if you want to pass additional options for the xml2js module. (see https://github.com/Leonidas-from-XIV/node-xml2js#options)
             });
         }
+        if(AmazonCategories.find().count() == 0){
+            Meteor.call('updateAmazonCategories');
+        }
     })
 }

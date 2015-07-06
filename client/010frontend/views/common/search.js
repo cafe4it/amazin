@@ -12,12 +12,42 @@ Template.search_widget.onCreated(function(){
                 })
             self.browseNodes.set(nodes);
         }
-    })
+    });
+    searchResult = new ReactiveVar({isDefault : true});
 })
 
 Template.search_widget.helpers({
     browseNodes : function () {
         return Template.instance().browseNodes.get();
+    },
+    searchResult : function(){
+        var sr = searchResult.get();
+        console.log(sr);
+        if(_.has(sr,'isDefault')){
+            return {
+                name : 'search_default',
+                data : []
+            }
+        }
+
+        if(_.has(sr,'isSearching')){
+            return {
+                name : 'search_loading',
+                data : []
+            }
+        }
+
+        if(!sr.isFound){
+            return {
+                name : 'search_notFound',
+                data : []
+            }
+        }else{
+            return {
+                name : sr.data.display,
+                data : sr
+            }
+        }
     }
 })
 
@@ -33,5 +63,33 @@ Template.search_widget.rendered = function(){
 }
 
 Template.search_widget.events({
+    'keyup #txtKeyword' : function(e,t){
+        e.preventDefault();
+        if(e.keyCode == 13){
+           var keyword = $('#txtKeyword').val(),
+               catId = $('#sltCategories').val();
+            searchResult.set({
+                isSearching : true
+            });
+           Meteor.call('scrapy_searchAmazon',catId,keyword,function(err,rs){
+               console.log(rs);
+               searchResult.set({
+                   isFound : true,
+                   data : rs
+               })
+           })
+        }
+    }
+})
 
+Template.s_grid_view.helpers({
+    searchResult : function(){
+        return Template.instance().data;
+    }
+});
+
+Template.s_list_view.helpers({
+    searchResult : function(){
+        return Template.instance().data;
+    }
 })

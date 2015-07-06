@@ -8,29 +8,70 @@
                     {{/each}}
                 </select>
             </div>
-            <div class="large-3 columns">
-                <select id="sltStatus">
-                    <option value="" selected>Tình trạng sản phẩm</option>
-                    <option value="All">Tất cả</option>
-                    <option value="New">Mới</option>
-                    <option value="Used">Đã sử dụng</option>
-                    <option value="Refurbished">Tân trang lại</option>
-                    <option value="Collectible">Hàng sưu tầm</option>
-                </select>
-            </div>
-            <div class="large-3 columns">
-                <input placeholder="Từ giá 0.00$" id="txtMinPrice" type="number">
-            </div>
-            <div class="large-3 columns">
-                <input placeholder="Đến giá 0.00$" id="txtMaxPrice" type="number">
-            </div>
-        </div>
-        <div class="row">
-            <div class="large-12 columns">
+            <div class="large-9 columns">
                 <input class="" id="txtKeyword" type="text" placeholder="Search">
             </div>
         </div>
+        {{> Template.dynamic template=searchResult.name data=searchResult.data}}
     {{else}}
         {{> data_loading}}
     {{/if}}
+</template>
+
+<template name="search_default"></template>
+
+<template name="s_grid_view">
+    {{#if searchResult.isFound}}
+        <div class="row">
+            <div class="large-12 columns">
+                <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+                    {{#each searchResult.data.items}}
+                        {{#if title}}
+                            <li>
+                                <div class="panel clearfix">
+                                    <div class="thumbnail">
+                                        <img src="{{thumbnail}}" alt="{{title}}"/>
+                                    </div>
+                                    <br>
+                                    <a href="/dp/{{asin}}">{{shortTitle}}</a>
+                                </div>
+                            </li>
+                        {{/if}}
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    {{/if}}
+</template>
+
+<template name="s_list_view">
+    {{#if searchResult.isFound}}
+        <div class="row">
+            <div class="large-12 columns">
+                <ul class="small-block-grid-1 medium-block-grid-1 large-block-grid-1">
+                    {{#each searchResult.data.items}}
+                        {{#if title}}
+                            <li>
+                                <div class="panel clearfix">
+                                    <div class="thumbnail">
+                                        <img src="{{thumbnail}}" alt="{{title}}"/>
+                                    </div>
+                                    <br>
+                                    <a href="/dp/{{asin}}">{{shortTitle}}</a>
+                                </div>
+                            </li>
+                        {{/if}}
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    {{/if}}
+</template>
+
+<template name="search_notFound">
+    <div class="row">
+        <div class="large-12 columns">
+            <h3>Không tìm thấy sản phẩm nào, xin thử lại...</h3>
+        </div>
+    </div>
 </template>
