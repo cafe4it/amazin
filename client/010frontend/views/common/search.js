@@ -14,6 +14,7 @@ Template.search_widget.onCreated(function(){
         }
     });
     searchResult = new ReactiveVar({isDefault : true});
+    paramsSearch = new ReactiveVar({});
 })
 
 Template.search_widget.helpers({
@@ -68,19 +69,32 @@ Template.search_widget.events({
         if(e.keyCode == 13){
            var keyword = $('#txtKeyword').val(),
                catId = $('#sltCategories').val();
-            searchResult.set({
-                isSearching : true
+            if(keyword.length <= 3) return;
+            paramsSearch.set({
+                catId : catId,
+                keywords : keyword,
+                page : 1
             });
-           Meteor.call('scrapy_searchAmazon',catId,keyword,function(err,rs){
-               console.log(rs);
-               searchResult.set({
-                   isFound : true,
-                   data : rs
-               })
-           })
+            callSearch();
         }
     }
 })
+
+function callSearch(){
+    var params = paramsSearch.get();
+    if(params){
+        searchResult.set({
+            isSearching : true
+        });
+        Meteor.call('scrapy_searchAmazon',params.catId,params.keywords,params.page,function(err,rs){
+            console.log(rs);
+            searchResult.set({
+                isFound : (rs.resultCount !== 'NOTFOUND'),
+                data : rs
+            })
+        })
+    }
+}
 
 Template.s_grid_view.helpers({
     searchResult : function(){
@@ -91,5 +105,14 @@ Template.s_grid_view.helpers({
 Template.s_list_view.helpers({
     searchResult : function(){
         return Template.instance().data;
+    }
+})
+
+Template.pagination.helpers({
+    pages : function(){
+        var data = Template.instance().data;
+        if(data.totalPages && data.totalPages > 0){
+            
+        }
     }
 })
