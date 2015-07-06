@@ -24,3 +24,4 @@ reactive-var
 ewall:foundation
 simple:reactive-method
 meteor:node-scrapy
+appcache

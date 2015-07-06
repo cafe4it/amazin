@@ -68,6 +68,7 @@ if (Meteor.isServer) {
             }
         },
         scrapy_searchAmazon: function (catId, keywords) {
+            this.unblock();
             check(catId, String);
             check(keywords, String);
             var templateUrl = _.template('http://www.amazon.com/s/ref=nb_sb_ss_ime_i_1_5?url=<%=category%>&field-keywords=<%=keywords%>');

@@ -48,16 +48,19 @@
     {{#if searchResult.isFound}}
         <div class="row">
             <div class="large-12 columns">
-                <ul class="small-block-grid-1 medium-block-grid-1 large-block-grid-1">
+                <ul class="no-bullet">
                     {{#each searchResult.data.items}}
                         {{#if title}}
-                            <li>
-                                <div class="panel clearfix">
-                                    <div class="thumbnail">
-                                        <img src="{{thumbnail}}" alt="{{title}}"/>
+                            <li class="panel list_item">
+                                <div class="row">
+                                    <div class="medium-2 columns text-center">
+                                        <a href="/dp/{{asin}}">
+                                            <img src="{{thumbnail}}" alt="{{title}}" width="160" height="160"/>
+                                        </a>
                                     </div>
-                                    <br>
-                                    <a href="/dp/{{asin}}">{{shortTitle}}</a>
+                                    <div class="medium-10 columns">
+                                        <a href="/dp/{{asin}}">{{shortTitle}}</a>
+                                    </div>
                                 </div>
                             </li>
                         {{/if}}

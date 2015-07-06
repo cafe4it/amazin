@@ -9,3 +9,9 @@ ul#list_items li{
 ul#list_items .panel{
     margin-bottom: 5px !important;
 }
+
+.list_item{
+    margin-bottom: 10px !important;
+    border: none !important;
+    padding: 10px !important;
+}
